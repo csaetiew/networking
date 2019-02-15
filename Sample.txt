@@ -1,0 +1,101 @@
+Test Scenario
+0-(Server Not Running):
+
+1-Run Client in upload mode -- (Output: Error Message: Server Not Found -- exit gracefully):
+server:
+client: ./ttweetcl -u 127.0.0.1 14000 testing
+
+server output:
+client output: Server not responding
+
+2-Run Client in download mode – (Output: Error Message: Server Not Found – exit gracefully):
+server:
+client: ./ttweetcl -d 127.0.0.1 14000
+
+server output:
+client output: Server not responding
+
+3-Run Server (server never exits or crashes – server may print out status statements to indicate
+client request activity – you should specific what the server will print in the README file)
+server: ./ttweetsrv 14000
+client: 
+
+server output:
+client output: 
+
+4-Run Client in download mode (Output: EMPTY Message)
+server: 
+client: ./ttweetcl -d 127.0.0.1 14000
+
+server output: Handling client 127.0.0.1
+Successfully sent Empty Message to client
+client output: Recieved Empty Message
+
+5-Run Client in upload mode – upload message0 > 150 characters (Output: Error)
+server:
+server output:
+
+client: ./ttweetcl -u 127.0.0.1 14000 "This_sentence_is_about_one_hundred_and_fifty_one_characters_long,_but_now_that_I_am_writing_it,_getting_to_one_hundred_and_fifty_one_characters_is_hard"
+client output: The message exceeds the limit of 150. It has 151 characters
+
+6-Run Client in download mode (Output: EMPTY Message)
+server:
+client: ./ttweetcl -d 127.0.0.1 14000
+
+server output:Handling client 127.0.0.1
+Successfully sent Empty Message to client
+client output: Recieved Empty Message
+
+7-Run Client in upload mode – upload message1 <= 150 characters (Output: Upload Successful)
+server:
+client: ./ttweetcl -u 127.0.0.1 14000 "This is a test"
+
+server output: Handling client 127.0.0.1
+Successfully stored This is a test
+client output: Message Upload Successful
+
+8-Run Client in download mode (Output: message1)
+server:
+client: ./ttweetcl -d 127.0.0.1 14000
+
+server output: Handling client 127.0.0.1
+Successfully sent This is a test to client
+client: Recieved This is a test
+
+9-Run Client in upload mode – upload message 2 (different from message1) <= 150 characters
+(Output: Upload Successful)
+server:
+client: ./ttweetcl -u 127.0.0.1 14000 "The sky can be blue. Sometimes it is dark" 
+
+server output: Handling client 127.0.0.1
+Successfully stored The sky can be blue. Sometimes it is dark
+client output: Message Upload Successful
+
+10-Run Client in download mode (Output: message2)
+server:
+client: ./ttweetcl -d 127.0.0.1 14000
+
+server output: Handling client 127.0.0.1
+Successfully sent The sky can be blue. Sometimes it is dark to client
+client output: Recieved The sky can be blue. Sometimes it is dark
+
+11-Run Client in upload mode – upload message3 > 150 characters (Output: Error)
+server:
+client: ./ttweetcl -u 127.0.0.1 14000 "There was a time when all the days Were filled with love and light Nothing seemed to bother us We loved every night But now the days have grown so cold I feel it in my heart How your love just grows old Do we have to part."
+
+server output:
+client output: The message exceeds the limit of 150. It has 222 characters
+
+12-Run Client in download mode (Output: message2)
+server:
+client: ./ttweetcl -d 127.0.0.1 14000
+
+server output: Handling client 127.0.0.1
+Successfully sent The sky can be blue. Sometimes it is dark to client
+client output: Recieved The sky can be blue. Sometimes it is dark
+
+
+
+
+
+
